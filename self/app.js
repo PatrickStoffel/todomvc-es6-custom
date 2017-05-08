@@ -1,5 +1,7 @@
 'use strict'
 
 import Controller from './controller'
+import View from './view'
 
-let ctrl = new Controller(window.document)
+let view = new View(window.document)
+let ctrl = new Controller(view)

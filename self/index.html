@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>TodoMVC ES6</title>
+    <link rel="stylesheet" href="../node_modules/todomvc-app-css/index.css">
     <!--script-download wird parallel gestartet und mit 'defer' erst am Schluss ausgeführt-->
     <script src="../build/build.js" defer></script> <!--script-tag sind nicht self closing!-->
 </head>
@@ -12,10 +13,10 @@
     </header>
     <main id="the-app" class="todoapp">
         <header>
-            <input id="new-todo" autofocus placeholder="Was muss getan werden?">
+            <input class="new-todo" autofocus placeholder="Was muss getan werden?">
         </header>
-        <ul id="list">
-            <li>Mein Todo</li>
+        <ul class="todo-list">
+            <!-- <li>Mein Todo</li> -->
         </ul>
     </main>
 <footer>
