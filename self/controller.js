@@ -1,17 +1,24 @@
 'use strict'
 
 export default class{
-    constructor(view){ //$-Zeichen zeigt, dass 'doc' ein DOM-Konten ist
-        let items = this.getItems()
-        view.renderItems(items)
+    constructor(view, store){ //$-Zeichen zeigt, dass 'doc' ein DOM-Konten ist
+        this.view = view;
+        this.store = store
+        let items = this.getItems().then((items)=> {
+            view.renderItems(items)
+        })
+
         //this.$doc = $doc //Zugriff von überall möglich
         //this.$list = $doc.querySelector(".list")
 
-        view.onAddItem(this.onAddItem)
+        view.registerAddItemHandler(this.onAddItem.bind(this))
     }
 
     onAddItem(item){
-
+        console.log(item)
+        this.view.addItem(item)
+        //save to db
+        //render item in view
     }
 
     //neues Listenelement erstellen, nach EventListener
@@ -23,15 +30,8 @@ export default class{
         $list.appendChild($li)
     }
 
-    //Mock für Test-Einträge
+    //aus Store lesen
     getItems(){
-        return [
-            {
-                title: 'Einkaufen'
-            },
-            {
-                title: 'Auto waschen'
-            }
-        ]
+        return this.store.getItems()
     }
 }

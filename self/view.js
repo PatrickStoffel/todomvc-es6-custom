@@ -1,31 +1,54 @@
 'use strict'
 
 const renderItem = Symbol() //Const vor 'class' definiert renderItem als privat
+const onChangeInput =Symbol()
 
 export default class {
 
     constructor($doc) {
         this.$doc = $doc
-
-        let $input = this.$doc.querySelector(".new-todo")
-        $input.addEventListener("change", this.onChangeInput.bind(this)) //'bind' damit 'this' auf das erste übergebene Element verweist
+        this.$list = this.$doc.querySelector(".todo-list")
+        this.$input = this.$doc.querySelector(".new-todo")
+        this.$input.addEventListener("change", this[onChangeInput].bind(this)) //'bind' damit 'this' auf das erste übergebene Element verweist
     }
 
-    onChangeInput(ev){
+    registerAddItemHandler(handler){
+        this.onAddItemHandler = handler
+    }
+
+
+    [onChangeInput](ev){
         //fire event, invoke subscribers
-        console.log(ev)
+        let item = {
+            title: ev.target.value
+        }
+
+        this.onAddItemHandler(item)
     }
 
 
     renderItems(items) {
-        let $list = this.$doc.querySelector(".todo-list")
-        $list.innerHTML = items.map(this[renderItem]) //Aufruf von Symbol mit []
+        //let $list = this.$doc.querySelector(".todo-list")
+        this.$list.innerHTML = items.map(this[renderItem]) //Aufruf von Symbol mit []
 /*        items.forEach((item) => {
             let $li = this.$doc.createElement("li")
             $li.innerText = item.text
             $list.appendChild($li)
         })*/
     }
+
+    addItem(item){
+        this.store.addItem(item)
+        this.store.getItems(item)
+
+
+        //console.log("addItem in view", item)
+        //let $elem = document.createElement('div')
+        //let html = this[renderItem](item)
+        //$elem.innerHTML = html //String wird dem dom-note übergeben
+        //this.$list.appendChild($elem.childNodes[0]) //childNote 0 ist erstes Element des div's
+    }
+
 
     [renderItem](item){ //Aufruf von Symbol mit []
         return `<li data-id="${item.id}">
