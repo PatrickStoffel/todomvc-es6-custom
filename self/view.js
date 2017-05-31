@@ -37,16 +37,18 @@ export default class {
         })*/
     }
 
+    renderError(error){
+        console.log("DEBUG", error)
+    }
+
     addItem(item){
-        this.store.addItem(item)
-        this.store.getItems(item)
+        //this.store.addItem(item)
 
-
-        //console.log("addItem in view", item)
-        //let $elem = document.createElement('div')
-        //let html = this[renderItem](item)
-        //$elem.innerHTML = html //String wird dem dom-note übergeben
-        //this.$list.appendChild($elem.childNodes[0]) //childNote 0 ist erstes Element des div's
+        console.log("addItem in view", item)
+        let $elem = document.createElement('div')
+        let html = this[renderItem](item)
+        $elem.innerHTML = html //String wird dem dom-note übergeben
+        this.$list.appendChild($elem.childNodes[0]) //childNote 0 ist erstes Element des div's
     }
 
 
