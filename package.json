@@ -2,7 +2,7 @@
   "name": "todomvc-es6-custom",
   "version": "0.1.0",
   "description": "Simple TodoMVC Application with vanilla ES6",
-  "author": "Ueli Kunz",
+  "author": "STPA",
   "license": "MIT",
   "scripts": {
     "test": "node_modules/.bin/mocha --require babel-register self/test/*.js"
